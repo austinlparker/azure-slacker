@@ -1,0 +1,17 @@
+FROM golang:1.10.1-stretch
+
+ENV AZURE_TENANT_ID ""
+ENV AZURE_CLIENT_ID ""
+ENV AZURE_CLIENT_SECRET ""
+ENV AZURE_SUBSCRIPTION_ID ""
+ENV AZURE_GROUP_BY_PREFIX ""
+ENV AZURE_RESOURCE_GROUP_NAME ""
+ENV SLACK_WEBHOOK ""
+
+WORKDIR /go/src/azwatcher
+COPY . .
+
+RUN go get -d -v ./...
+RUN go install -v ./...
+
+CMD ["azwatcher"]
